@@ -1,40 +1,19 @@
-import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import Clicker from "./app/screens/clicker/clicker";
+import Menu from "./app/screens/menu/menu";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [number, setNumber] = useState(0);
-
-  function incrementar() {
-    return setNumber(number + 1);
-  }
-
   return (
-    <View style={styles.container}>
-      <Text style={{ color: "white" }}>Olá Mundooo</Text>
-      <StatusBar style="auto" />
-      <TouchableOpacity onPress={incrementar} style={styles.button}>
-        <Text>Botao</Text>
-      </TouchableOpacity>
-      <Text style={styles.numero}>{number}</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Menu">
+        <Stack.Screen name="Menu" component={Menu} />
+        <Stack.Screen name="Clicker" component={Clicker} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  button: {
-    backgroundColor: "yellow",
-    marginTop: 20,
-    padding: 20,
-  },
-  numero: {
-    marginTop: 40,
-    color: "white",
-  },
-});
